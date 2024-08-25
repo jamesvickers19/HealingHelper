@@ -28,7 +28,7 @@ const LinkItem = ({
   );
 };
 
-export default function MedicationsScreen() {
+export default function MedicationsListScreen() {
   const router = useRouter();
 
   // TODO maybe just navigate to a page instead of opening a modal?
