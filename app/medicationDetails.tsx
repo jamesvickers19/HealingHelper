@@ -4,12 +4,9 @@ import { Button, Platform, StyleSheet } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
-// TODO change this to show a medication details page
-
-export default function ModalScreen() {
+export default function MedicationDetailsScreen() {
   const router = useRouter();
   const x = useLocalSearchParams();
-  console.log("modal data", JSON.stringify(x));
   return (
     <View style={styles.container}>
       <Text>Common Name: {x.commonName}</Text>

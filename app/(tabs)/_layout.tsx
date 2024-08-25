@@ -33,7 +33,7 @@ export default function TabLayout() {
           title: "Medications",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link href="/medicationDetails" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -49,7 +49,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="index"
+        name="symptomsList"
         options={{
           title: "Symptoms",
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,

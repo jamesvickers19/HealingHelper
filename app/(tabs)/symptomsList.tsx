@@ -2,17 +2,17 @@ import { FlatList, TouchableOpacity, StyleSheet } from "react-native";
 
 import { Text, View } from "@/components/Themed";
 import { useRouter } from "expo-router";
-import { medicationFiles } from "../../assets/files";
+import { symptomFiles } from "../../assets/files";
 
 const LinkItem = ({
   title,
-  openMedicationDetails,
+  openSymptomDetails,
 }: {
   title: string;
-  openMedicationDetails: () => void;
+  openSymptomDetails: () => void;
 }) => {
   const handlePress = () => {
-    openMedicationDetails();
+    openSymptomDetails();
   };
 
   return (
@@ -26,21 +26,21 @@ export default function MedicationsListScreen() {
   const router = useRouter();
 
   // TODO maybe just navigate to a page instead of opening a modal?
-  const openMedicationDetails = (data: any) => {
+  const openSymptomDetails = (data: any) => {
     router.push({
-      pathname: "/medicationDetails",
+      pathname: "/symptomDetails",
       params: data,
     });
   };
   return (
     <View style={styles.container}>
       <FlatList
-        data={medicationFiles}
+        data={symptomFiles}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <LinkItem
-            title={item.commonName}
-            openMedicationDetails={() => openMedicationDetails(item)}
+            title={item.name}
+            openSymptomDetails={() => openSymptomDetails(item)}
           />
         )}
       />
