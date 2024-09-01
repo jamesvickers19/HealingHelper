@@ -1,8 +1,14 @@
-import { FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+} from "react-native";
 
 import { Text, View } from "@/components/Themed";
 import { useRouter } from "expo-router";
 import { symptomFiles } from "../../assets/files";
+import { useState } from "react";
 
 const LinkItem = ({
   title,
@@ -32,10 +38,33 @@ export default function MedicationsListScreen() {
       params: data,
     });
   };
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredSymptoms, setFilteredSymptoms] = useState(symptomFiles);
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    if (query) {
+      setFilteredSymptoms(
+        symptomFiles.filter((item) =>
+          JSON.stringify(item).toLowerCase().includes(query.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredSymptoms(symptomFiles);
+    }
+  };
+
   return (
     <View style={styles.container}>
+      <TextInput
+        style={styles.searchBar}
+        placeholder="Search..."
+        value={searchQuery}
+        onChangeText={handleSearch}
+      />
       <FlatList
-        data={symptomFiles}
+        data={filteredSymptoms}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item }) => (
@@ -63,6 +92,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "blue",
     //textDecorationLine: "underline",
+  },
+  searchBar: {
+    height: 40,
+    borderColor: "#CED0CE",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    marginHorizontal: 10,
   },
   separator: {
     backgroundColor: "#CED0CE",
