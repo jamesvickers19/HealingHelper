@@ -17,7 +17,7 @@ const LinkItem = ({
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.linkContainer}>
-      <Text>{title}</Text>
+      <Text style={styles.linkText}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -37,6 +37,7 @@ export default function MedicationsListScreen() {
       <FlatList
         data={medicationFiles}
         keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item }) => (
           <LinkItem
             title={item.commonName}
@@ -51,24 +52,22 @@ export default function MedicationsListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
   },
   linkContainer: {
+    marginLeft: 7,
     marginVertical: 10,
   },
   linkText: {
-    fontSize: 18,
-    color: "white",
-    textDecorationLine: "underline",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 24,
+    color: "blue",
+    //textDecorationLine: "underline",
   },
   separator: {
-    marginVertical: 30,
+    backgroundColor: "#CED0CE",
+    marginVertical: 3,
     height: 1,
-    width: "80%",
+    width: 1000,
   },
 });
